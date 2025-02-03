@@ -14,6 +14,10 @@ class PostProcessor {
 		Texture2D		tex;
 		unsigned int	W, H;
 		bool			confuse, chaos, shake;
+		// Post Processes:
+		// 	- Screen shake
+		// 	- Confuse (Instant and fade, fast and slow)
+		// 	- Chaos (Instant and fade)
 
 		PostProcessor(Shader shader, unsigned int w, unsigned int h);
 

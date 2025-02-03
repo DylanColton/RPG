@@ -18,8 +18,12 @@ Shader		&ResourceManager::LoadShader(std::string name, const char* vSF, const ch
 	return Shaders[name];
 }
 Shader		&ResourceManager::GetShader(std::string name) {
-	if (Shaders.find(name) == Shaders.end())
-		std::cerr << "Could not find shader " << name << std::endl;
+	if (Shaders.find(name) == Shaders.end()) {
+		std::cerr << "Could not find shader " << name << ". Returning basic shader" << std::endl;
+		if (Shaders.find("basic") == Shaders.end())
+			Shaders["basic"] = loadShaderFromFile("shaders/basic.vs", "shaders/basic.fs", nullptr);
+		return Shaders["basic"];
+	}
 	return Shaders[name];
 }
 
@@ -29,8 +33,12 @@ Texture2D	&ResourceManager::LoadTexture2D(std::string name, const char* file, bo
 	return Textures[name];
 }
 Texture2D	&ResourceManager::GetTexture2D(std::string name) {
-	if (Textures.find(name) == Textures.end())
-		std::cerr << "Could not find texture " << name << std::endl;
+	if (Textures.find(name) == Textures.end()) {
+		std::cerr << "Could not find texture " << name << ". Returning empty texture." << std::endl;
+		if (Textures.find("empty") == Textures.end())
+			Textures["empty"] = loadTexture2DFromFile("resources/textures/empty.png", true);
+		return Textures["empty"];
+	}
 	return Textures[name];
 }
 

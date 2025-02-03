@@ -26,7 +26,7 @@ unsigned int numSam = 1;
 
 float cf, dt = 0;
 
-Game Breakout(SCR_W, SCR_H);
+Game RPG(SCR_W, SCR_H);
 
 int main(int argc, char *argv[]) {
 	if (!glfwInit()) {
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 	// Tells GLFW if the buffer should be double
 	glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 	
-	GLFWwindow* window = glfwCreateWindow(SCR_W, SCR_H, "Breakout", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_W, SCR_H, "RPG", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "FAILED TO CREATED GLFW WINDOW" << std::endl;
 		glfwTerminate();
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 	//glfwSwapInterval(0);
 	// Force the cursor to the center
     //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	// Setup the framebuffer size callback
+
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 	glfwSetKeyCallback(window, key_callback);
 
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 	// Sound Device
 	SoundDevice::getInstance();
 
-	Breakout.Init();
+	RPG.Init();
 	
 	float lf = 0;
 	while(!glfwWindowShouldClose(window)) {
@@ -92,21 +92,21 @@ int main(int argc, char *argv[]) {
 		glfwPollEvents();
 
 		// Logic
-		Breakout.ProcessInput(dt);
-		Breakout.Update(dt);
+		RPG.ProcessInput(dt);
+		RPG.Update(dt);
 
 		// Rendering
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		
-		Breakout.Render();
+		RPG.Render();
 
 		//std::cout << (dt > 0 ? (1/dt) : 0) << " FPS" << std::endl;
 
 		glfwSwapBuffers(window);
 	}
 
-	Breakout.Clear();
+	RPG.Clear();
 	ResourceManager::Clear();
 
 	glfwTerminate();
@@ -124,9 +124,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	if (key >= 0 && key < 1024)
 		if (action == GLFW_PRESS) {
-			Breakout.Keys[key] = true;
+			RPG.Keys[key] = true;
 		} else if (action == GLFW_RELEASE) {
-			Breakout.Keys[key] = false;
+			RPG.Keys[key] = false;
 		}
 }
 

@@ -8,12 +8,12 @@
 #include <GLFW/glfw3.h>
 
 #include "game_level.h"
-#include "power_up.h"
 
 enum GameState {
-	GAME_ACTIVE,
-	GAME_MENU,
-	GAME_WIN
+	TITLE,
+	OVERWORLD,
+	MENU,
+	DIALOG
 };
 
 enum Direction {
@@ -25,21 +25,16 @@ enum Direction {
 
 typedef std::tuple<bool, Direction, glm::vec2> Collision;
 
-const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
-const float PLAYER_VELOCITY(500.0f);
-const glm::vec2 INITIAL_BALL_VELOCITY(100.0f, -350.0f);
-const float BALL_RADIUS = 12.5F;
+const float PLAYER_WLK(500.0f);
+const float PLAYER_RUN(1000.0f);
 
 class Game {
 	public:
 		GameState				State;
-		bool					Keys[1024];
-		bool					KeysProcessed[1024];
+		bool					Keys[1024], KeysProcessed[1024];
 		unsigned int 			W, H;
-		std::vector<GameLevel>	Levels;
-		std::vector<PowerUp>	PowerUps;
-		unsigned int			Level;
-		unsigned int			Lives;
+		std::vector<GameLevel>	Maps;
+		unsigned int			map;
 
 		Game(unsigned int w, unsigned int h);
 		~Game();
@@ -53,9 +48,6 @@ class Game {
 
 		void ResetLevel();
 		void ResetPlayer();
-
-		void SpawnPowerUps(GameObject &block);
-		void UpdatePowerUps(float dt);
 
 		void Clear();
 };
