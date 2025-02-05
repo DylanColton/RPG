@@ -1,8 +1,12 @@
 #include "entity.h"
 
 Entity::Entity() : GameObject() {
-	charSheet		= "NULL";
-	state			= IDLE;
+	this->charSheet		= "NULL";
+	this->script		= "NULL";
+	this->state			= IDLE;
 }
 
 Entity::~Entity() { }
+
+void Entity::Move() {
+}

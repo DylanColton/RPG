@@ -37,8 +37,6 @@ void Game::Clear() {
 void Game::Init() {
 	// Load Shaders
 	ResourceManager::LoadShader("sprite", "sprite.vs", "sprite.fs", nullptr);
-	ResourceManager::LoadShader("particle", "particle.vs", "particle.fs", nullptr);
-	ResourceManager::LoadShader("postprocess", "post_process.vs", "post_process.fs", nullptr);
 
 	// Configure Shaders
 	glm::mat4 proj = glm::ortho(0.0f, static_cast<float>(this->W), static_cast<float>(this->H), 0.0f, -1.0f, 1.0f);
@@ -48,6 +46,7 @@ void Game::Init() {
 
 	// Load Textures
 	ResourceManager::LoadTexture2D("wood", "wood.png", true);
+	ResourceManager::LoadTexture2D("grey_tile", "grey_tile.png", true);
 
 	// Load Music
 
@@ -57,10 +56,12 @@ void Game::Init() {
 	renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 
 	// Load Maps
-	GameLevel lvl;
-	lvl.Load("test_area.map", 50);
-	this->Maps[lvl.name] = lvl;
-	this->map = lvl.name;
+	GameLevel test_area;	test_area.Load("test_area.map", 50);
+	GameLevel test_grey;	test_grey.Load("test_grey.map", 50);
+
+	this->Maps[test_area.name] = test_area;
+	this->Maps[test_grey.name] = test_grey;
+	this->map = test_grey.name;
 
 	// Set up player
 }
@@ -69,22 +70,22 @@ void Game::Update(float dt) {
 }
 
 void handleTitle() {
-	std::cout << "In the Title" << std::endl;
+	//std::cout << "In the Title" << std::endl;
 }
 void handleOverWorld() {
-	std::cout << "In the Overworld" << std::endl;
+	//std::cout << "In the Overworld" << std::endl;
 }
 void handleMenu() {
-	std::cout << "In Menu" << std::endl;
+	//std::cout << "In Menu" << std::endl;
 }
 void handleDialog() {
-	std::cout << "In dialog" << std::endl;
+	//std::cout << "In dialog" << std::endl;
 }
 void handleIllegal() {
-	std::cout << "Illegal state" << std::endl;
-	std::cout << "We get here when something incorrect happens" << std::endl
-		<< "I suppose attempting to salvage the previous state would be appropriate" << std::endl
-		<< "There should be some options to close the game, which will take a few seconds while cleanup occurs" << std::endl;
+	//std::cout << "Illegal state" << std::endl;
+	//std::cout << "We get here when something incorrect happens" << std::endl
+	//	<< "I suppose attempting to salvage the previous state would be appropriate" << std::endl
+	//	<< "There should be some options to close the game, which will take a few seconds while cleanup occurs" << std::endl;
 }
 void Game::ProcessInput(float dt) {
 	switch (this->State) {

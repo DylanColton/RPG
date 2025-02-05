@@ -1,0 +1,26 @@
+{
+	"COMMON"	: {
+		"UP"		: 0,
+		"DOWN"		: 0,
+		"LEFT"		: 0,
+		"RIGHT"		: 0
+	},
+	"TITLE"		: {
+		"ACCEPT"	: 0,
+		"CANCEL"	: 0
+	},
+	"MENU"		: {
+		"MENU"		: 0
+	},
+	"DIALOG"	: {
+		"MENU"		: 0,
+		"NEXT"		: 0,
+		"HISTORY"	: 0,
+		"AUTO"		: 0,
+		"SKIP"		: 0
+	},
+	"OVERWORLD"	: {
+		"MENU"		: 0,
+		"RUN"		: 0
+	}
+}
