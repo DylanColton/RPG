@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <string>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -13,6 +14,21 @@ std::map<std::string, Sound>		ResourceManager::Music;
 std::map<std::string, Sound>		ResourceManager::SFX;
 
 Shader		&ResourceManager::LoadShader(std::string name, const char* vSF, const char* fSF, const char* gSF) {
+	std::string vST = "shaders/";
+	vST += std::string(vSF);
+	vSF = vST.c_str();
+
+	std::string fST = "shaders/";
+	fST += std::string(fSF);
+	fSF = fST.c_str();
+	
+	std::string gST;
+	if (gSF != nullptr) {
+		gST = "shaders/";
+		gST += std::string(gSF);
+		gSF = gST.c_str();
+	}
+
 	if (Shaders.find(name) == Shaders.end())
 		Shaders[name] = loadShaderFromFile(vSF, fSF, gSF);
 	return Shaders[name];
@@ -28,6 +44,10 @@ Shader		&ResourceManager::GetShader(std::string name) {
 }
 
 Texture2D	&ResourceManager::LoadTexture2D(std::string name, const char* file, bool alpha) {
+	std::string str = "resources/textures/";
+	str += file;
+	file = str.c_str();
+
 	if (Textures.find(name) == Textures.end())
 		Textures[name] = loadTexture2DFromFile(file, alpha);
 	return Textures[name];

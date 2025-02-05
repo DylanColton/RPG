@@ -12,7 +12,8 @@ class GameObject {
 		glm::vec2	pos, size, vel;
 		glm::vec3	col;
 		float		rot;
-		bool		solid, destroyed;
+		bool		coll[4];
+		bool		port[4];
 		Texture2D	spr;
 
 		GameObject();

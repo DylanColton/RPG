@@ -1,29 +1,25 @@
 #ifndef GAMELEVEL_H
 #define GAMELEVEL_H
 
+#include <string>
 #include <vector>
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-#include "game_object.h"
-#include "sprite_renderer.h"
 #include "resource_manager.h"
+#include "sprite_renderer.h"
+#include "game_object.h"
 
 class GameLevel {
 	public:
-		std::vector<GameObject> Bricks;
+		std::vector<GameObject> Tiles;
+		unsigned int			W, H;
 
 		GameLevel() { }
 
-		void Load(const char* file, unsigned int lvlW, unsigned int lvlH);
-
+		void Load(const char* file, unsigned int tileSize);
 		void Draw(SpriteRenderer &renderer);
-
-		bool isComplete();
-
-	private:
-		void init(std::vector<std::vector<unsigned int>> tileData, unsigned int lvlW, unsigned int lvlH);
 };
 
 #endif

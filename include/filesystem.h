@@ -22,7 +22,7 @@ class Filesystem {
 			fs::path current = fs::current_path();
 
 			while (current.has_parent_path()) {
-				if (fs::exists(current / "main"))
+				if (fs::exists(current / "main.cpp"))
 					return current;
 				current = current.parent_path();
 			}

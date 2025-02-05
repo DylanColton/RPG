@@ -9,6 +9,7 @@
 
 #include "resource_manager.h"
 #include "sound_device.h"
+//#include "camera2d.h"
 #include "game.h"
 
 #include "filesystem.h"

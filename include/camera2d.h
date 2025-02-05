@@ -12,8 +12,6 @@ enum Camera_Movement {
 	RIGHT
 };
 
-const float SPEED		=   2.5f;
-
 class Camera2D {
 	public:
 		glm::vec3 Pos;
@@ -21,10 +19,9 @@ class Camera2D {
         glm::vec3 Up;
         glm::vec3 Right;
         glm::vec3 WorldUp;
-        float MoveSpeed;
 
         Camera2D(glm::vec3 pos=glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up=glm::vec3(0.0f, 1.0f, 0.0f))
-            : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MoveSpeed(SPEED) {
+            : Front(glm::vec3(0.0f, 0.0f, -1.0f)) {
             Pos = pos;
             WorldUp = up;
         }

@@ -36,9 +36,9 @@ void Game::Clear() {
 
 void Game::Init() {
 	// Load Shaders
-	ResourceManager::LoadShader("sprite", "shaders/sprite.vs", "shaders/sprite.fs", nullptr);
-	ResourceManager::LoadShader("particle", "shaders/particle.vs", "shaders/particle.fs", nullptr);
-	ResourceManager::LoadShader("postprocess", "shaders/post_process.vs", "shaders/post_process.fs", nullptr);
+	ResourceManager::LoadShader("sprite", "sprite.vs", "sprite.fs", nullptr);
+	ResourceManager::LoadShader("particle", "particle.vs", "particle.fs", nullptr);
+	ResourceManager::LoadShader("postprocess", "post_process.vs", "post_process.fs", nullptr);
 
 	// Configure Shaders
 	glm::mat4 proj = glm::ortho(0.0f, static_cast<float>(this->W), static_cast<float>(this->H), 0.0f, -1.0f, 1.0f);
@@ -47,14 +47,20 @@ void Game::Init() {
 	ResourceManager::GetShader("sprite").setMat4("proj", proj);
 
 	// Load Textures
+	ResourceManager::LoadTexture2D("wood", "wood.png", true);
 
 	// Load Music
 
 	// Load SFX
 
 	// Set Rendering Controllers
+	renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 
-	// Load Level
+	// Load Maps
+	GameLevel lvl;
+	lvl.Load("resources/areas/test_area.map", 50);
+	this->Maps.push_back(lvl);
+	this->map = 0;
 
 	// Set up player
 }
@@ -95,6 +101,8 @@ void Game::ProcessInput(float dt) {
 }
 
 void Game::Render() {
+	this->Maps[this->map].Draw(*renderer);
+
 	/*
 	if (this->State == GAME_ACTIVE || this->State == GAME_MENU || this->State == GAME_WIN) {
 		// begin write of postproc buffer
