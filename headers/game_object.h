@@ -12,8 +12,8 @@ class GameObject {
 		glm::vec2	pos, size, vel;
 		glm::vec3	col;
 		float		rot;
-		bool		coll[4];
-		bool		port[4];
+		bool		coll[4], port[4];
+		std::string	port_loc;
 		Texture2D	spr;
 
 		GameObject();

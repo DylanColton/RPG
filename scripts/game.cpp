@@ -58,9 +58,9 @@ void Game::Init() {
 
 	// Load Maps
 	GameLevel lvl;
-	lvl.Load("resources/areas/test_area.map", 50);
-	this->Maps.push_back(lvl);
-	this->map = 0;
+	lvl.Load("test_area.map", 50);
+	this->Maps[lvl.name] = lvl;
+	this->map = lvl.name;
 
 	// Set up player
 }
@@ -68,7 +68,47 @@ void Game::Init() {
 void Game::Update(float dt) {
 }
 
+void handleTitle() {
+	std::cout << "In the Title" << std::endl;
+}
+void handleOverWorld() {
+	std::cout << "In the Overworld" << std::endl;
+}
+void handleMenu() {
+	std::cout << "In Menu" << std::endl;
+}
+void handleDialog() {
+	std::cout << "In dialog" << std::endl;
+}
+void handleIllegal() {
+	std::cout << "Illegal state" << std::endl;
+	std::cout << "We get here when something incorrect happens" << std::endl
+		<< "I suppose attempting to salvage the previous state would be appropriate" << std::endl
+		<< "There should be some options to close the game, which will take a few seconds while cleanup occurs" << std::endl;
+}
 void Game::ProcessInput(float dt) {
+	switch (this->State) {
+		case TITLE:
+			handleTitle();
+			break;
+
+		case OVERWORLD:
+			handleOverWorld();
+			break;
+
+		case MENU:
+			handleMenu();
+			break;
+
+		case DIALOG:
+			handleDialog();
+			break;
+
+		default:
+			handleIllegal();
+			break;
+	}
+
 	/*
 	if (this->State == GAME_MENU) {
 		if (this->Keys[GLFW_KEY_ENTER] && !this->KeysProcessed[GLFW_KEY_ENTER]) {

@@ -5,6 +5,9 @@
 #include <sstream>
 
 void GameLevel::Load(const char* file, unsigned int tileSize) {
+	std::string str = "resources/areas/";
+	str += file;
+	file = str.c_str();
 	this->Tiles.clear();
 
 	unsigned int tileCode;
@@ -16,11 +19,10 @@ void GameLevel::Load(const char* file, unsigned int tileSize) {
 		std::getline(fstream, line);
 		std::istringstream ss(line);
 		// Here is where we get the number of tiles
-		unsigned int w, h;
-		ss >> w >> h;
+		ss >> this->name >> this->W >> this->H;
 
-		this->W = w * tileSize;
-		this->H = h * tileSize;
+		this->W *= tileSize;
+		this->H *= tileSize;
 
 		while (std::getline(fstream, line)) {
 			std::istringstream ss(line);
@@ -50,6 +52,8 @@ void GameLevel::Load(const char* file, unsigned int tileSize) {
 				ss >> temp;
 				go.port[i] = (temp != 0);
 			}
+
+			ss >> go.port_loc;
 
 			this->Tiles.push_back(go);
 		}

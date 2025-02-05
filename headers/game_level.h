@@ -15,6 +15,7 @@ class GameLevel {
 	public:
 		std::vector<GameObject> Tiles;
 		unsigned int			W, H;
+		std::string				name;
 
 		GameLevel() { }
 

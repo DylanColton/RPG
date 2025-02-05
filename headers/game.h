@@ -1,8 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <string>
 #include <vector>
 #include <tuple>
+#include <map>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -30,11 +32,11 @@ const float PLAYER_RUN(1000.0f);
 
 class Game {
 	public:
-		GameState				State;
-		bool					Keys[1024], KeysProcessed[1024];
-		unsigned int 			W, H;
-		std::vector<GameLevel>	Maps;
-		unsigned int			map;
+		GameState							State;
+		bool								Keys[1024], KeysProcessed[1024];
+		unsigned int 						W, H;
+		std::map<std::string, GameLevel>	Maps;
+		std::string 						map;
 
 		Game(unsigned int w, unsigned int h);
 		~Game();

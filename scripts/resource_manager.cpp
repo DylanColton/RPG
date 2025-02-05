@@ -63,6 +63,9 @@ Texture2D	&ResourceManager::GetTexture2D(std::string name) {
 }
 
 Sound		&ResourceManager::LoadMusic(std::string name, const char* file, float init_vol) {
+	std::string str = "resources/audio/";
+	str += file;
+	file = str.c_str();
 	if (Music.find(name) == Music.end())
 		Music[name] = loadSoundFromFile(file, SoundType::BGM);
 	Music[name].setVolume(init_vol);
@@ -75,6 +78,9 @@ Sound		&ResourceManager::GetMusic(std::string name) {
 }
 
 Sound		&ResourceManager::LoadSoundEffect(std::string name, const char* file, float init_vol) {
+	std::string str = "resources/audio/";
+	str += file;
+	file = str.c_str();
 	if (SFX.find(name) == SFX.end())
 		SFX[name] = loadSoundFromFile(file, SoundType::SE);
 	SFX[name].setVolume(init_vol);
