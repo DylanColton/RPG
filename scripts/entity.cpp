@@ -10,3 +10,6 @@ Entity::~Entity() { }
 
 void Entity::Move() {
 }
+
+void Entity::setState(EntityState newState) {
+}

@@ -12,13 +12,15 @@
 #include "text_renderer.h"
 #include "sound_device.h"
 #include "game_object.h"
+#include "entity.h"
+#include "player.h"
 #include "game.h"
 
 ParticleGenerator*	ParticleGen;
 SpriteRenderer*		renderer;
 PostProcessor*		postproc;
 TextRenderer*		Text;
-GameObject*			Player;
+Player*				player;
 
 float ShakeTime	= 0.0f;
 
@@ -30,7 +32,7 @@ void Game::Clear() {
 	delete ParticleGen;
 	delete renderer;
 	delete postproc;
-	delete Player;
+	delete player;
 	delete Text;
 }
 
@@ -61,12 +63,14 @@ void Game::Init() {
 
 	this->Maps[test_area.name] = test_area;
 	this->Maps[test_grey.name] = test_grey;
-	this->map = test_grey.name;
+	this->map = test_area.name;
 
 	// Set up player
+	player = new Player();
 }
 
 void Game::Update(float dt) {
+	player->Move();
 }
 
 void handleTitle() {
@@ -95,6 +99,23 @@ void Game::ProcessInput(float dt) {
 
 		case OVERWORLD:
 			handleOverWorld();
+			player->setState(IDLE);
+			if (this->Keys[GLFW_KEY_W] && !this->Keys[GLFW_KEY_S]) {
+				player->setState(WLK_N);
+				std::cout << "KEY W IS PRESSED" << std::endl;
+			}
+			if (this->Keys[GLFW_KEY_S] && !this->Keys[GLFW_KEY_W]) {
+				player->setState(WLK_S);
+				std::cout << "KEY S IS PRESSED" << std::endl;
+			}
+			if (this->Keys[GLFW_KEY_A] && !this->Keys[GLFW_KEY_D]) {
+				player->setState(WLK_W);
+				std::cout << "KEY A IS PRESSED" << std::endl;
+			}
+			if (this->Keys[GLFW_KEY_D] && !this->Keys[GLFW_KEY_A]) {
+				player->setState(WLK_E);
+				std::cout << "KEY D IS PRESSED" << std::endl;
+			}
 			break;
 
 		case MENU:

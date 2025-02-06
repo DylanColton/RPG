@@ -8,6 +8,9 @@ class Player : public Entity {
 		Player();
 		~Player();
 
+		void Move() override;
+		void setState(EntityState newState) override;
+
 	private:
 };
 
